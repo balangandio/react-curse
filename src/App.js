@@ -3,19 +3,28 @@ import Person from './Person/Person';
 import './App.css';
 
 class App extends Component {
-  state = { name: 'human', age: 42, year: 2012 };
+  state = {
+    persons: [{ name: 'human', age: 42, year: 6354 }, 
+      { name: 'unknown', age: 23, year: 734 },
+      { name: 'loading', age: 462, year: 4332 }],
+    visibility: true
+  };
 
-  clickHandler = () => {
-    this.setState({ year: this.state.year + 1 });
+  toggleHandler = () => {
+    this.setState({ visibility: !this.state.visibility });
   }
 
   render() {
+    const persons = this.state.visibility 
+      ? this.state.persons.map((p, i) => (<Person key={i} name={p.name} age={p.age} year={p.year} />))
+      : null;
+
     return (
       <div className="App">
         <h1>Hello there!</h1>
-        <Person name={this.state.name} age={this.state.age} year={this.state.year} />
+        <button onClick={this.toggleHandler}>Toggle</button>
         <p></p>
-        <button onClick={this.clickHandler}>New Year</button>
+        { persons }
       </div>
     );
   }
