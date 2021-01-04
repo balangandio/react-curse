@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Person from './Person/Person';
 import './App.css';
 import styled from 'styled-components';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 const StyledH1 = styled.h1`
   color: ${props => props.alt.color}
@@ -28,7 +29,7 @@ class App extends Component {
 
   render() {
     const persons = this.state.visibility 
-      ? this.state.persons.map((p, i) => (<Person key={i} name={p.name} age={p.age} year={p.year} />))
+      ? this.state.persons.map((p, i) => (<ErrorBoundary key={i}><Person name={p.name} age={p.age} year={p.year} /></ErrorBoundary>))
       : null;
 
     const styleParams = {
