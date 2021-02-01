@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 
 import './index.css';
-import App from './App';
+import App from './redux/App';
 import registerServiceWorker from './registerServiceWorker';
 import reducer from './store/reducer';
 
@@ -19,5 +19,5 @@ const app = (
     </Provider>
 );
 
-ReactDOM.render(app, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
