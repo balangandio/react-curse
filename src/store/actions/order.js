@@ -22,12 +22,12 @@ export const purchaseBurguerStart = () => {
     };
 };
 
-export const purchaseBurguer = (orderData) => {
+export const purchaseBurguer = (orderData, token) => {
     return dispatch => {
         dispatch(purchaseBurguerStart());
 
         setTimeout(() => {
-            axios.get('/posts')
+            axios.get('/posts?token=' + token)
                 .then(resp => 'gretg5654hrh3gerg34fefreger')
                 .then(orderId => dispatch(purchaseBurguerSuccess(orderId, orderData)))
                 .catch(error => dispatch(purchaseBurguerFail(error)));
@@ -61,12 +61,12 @@ export const fetchOrdersStart = () => {
     };
 };
 
-export const fetchOrders = () => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart());
         
         setTimeout(() => {
-            axios.get('/posts')
+            axios.get(`/posts?token=${token}&userId=${userId}`)
                 .then(resp => {
                     return [
                         { id: 1, price: 23, ingredients: {bacon: 6, cheese: 2, meat: 0, salad: 2}, deliveryMethod: 'fastest' },
