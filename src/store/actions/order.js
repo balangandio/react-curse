@@ -1,5 +1,4 @@
 import * as actionTypes from './actionsTypes';
-import axios from '../../axios-orders';
 
 export const purchaseBurguerSuccess = (id, orderData) => {
     return {
@@ -23,15 +22,10 @@ export const purchaseBurguerStart = () => {
 };
 
 export const purchaseBurguer = (orderData, token) => {
-    return dispatch => {
-        dispatch(purchaseBurguerStart());
-
-        setTimeout(() => {
-            axios.get('/posts?token=' + token)
-                .then(resp => 'gretg5654hrh3gerg34fefreger')
-                .then(orderId => dispatch(purchaseBurguerSuccess(orderId, orderData)))
-                .catch(error => dispatch(purchaseBurguerFail(error)));
-        }, 2000);
+    return {
+        type: actionTypes.PURCHASE_BURGER,
+        orderData,
+        token
     };
 };
 
@@ -62,19 +56,9 @@ export const fetchOrdersStart = () => {
 };
 
 export const fetchOrders = (token, userId) => {
-    return dispatch => {
-        dispatch(fetchOrdersStart());
-        
-        setTimeout(() => {
-            axios.get(`/posts?token=${token}&userId=${userId}`)
-                .then(resp => {
-                    return [
-                        { id: 1, price: 23, ingredients: {bacon: 6, cheese: 2, meat: 0, salad: 2}, deliveryMethod: 'fastest' },
-                        { id: 2, price: 42, ingredients: {bacon: 0, cheese: 2, meat: 0, salad: 2}, deliveryMethod: 'fastest' },
-                        { id: 3, price: 1.42, ingredients: {bacon: 1, cheese: 4, meat: 0, salad: 2}, deliveryMethod: 'fastest' }
-                    ];
-                }).then(orders => dispatch(fetchOrdersSuccess(orders)))
-                .catch(error => dispatch(fetchOrdersFail(error)));
-        }, 2000);
+    return {
+        type: actionTypes.FETCH_ORDERS,
+        token,
+        userId
     };
 };
